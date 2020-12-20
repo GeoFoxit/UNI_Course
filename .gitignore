@@ -4,6 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
+back_end/.vs/
 back_end/*.rsuser
 back_end/*.suo
 back_end/*.user
@@ -360,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+back_end/obj/
+
+back_end/bin/Debug/netcoreapp3.1/
