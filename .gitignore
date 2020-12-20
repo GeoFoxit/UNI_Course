@@ -4,187 +4,187 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
-*.rsuser
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
+back_end/*.rsuser
+back_end/*.suo
+back_end/*.user
+back_end/*.userosscache
+back_end/*.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
-*.userprefs
+back_end/*.userprefs
 
 # Mono auto generated files
-mono_crash.*
+back_end/mono_crash.*
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
+back_end/[Dd]ebug/
+back_end/[Dd]ebugPublic/
+back_end/[Rr]elease/
+back_end/[Rr]eleases/
+back_end/x64/
+back_end/x86/
+back_end/[Ww][Ii][Nn]32/
+back_end/[Aa][Rr][Mm]/
+back_end/[Aa][Rr][Mm]64/
+back_end/bld/
+back_end/[Bb]in/
+back_end/[Oo]bj/
+back_end/[Ll]og/
+back_end/[Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
-.vs/
+back_end/.vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
 # Visual Studio 2017 auto generated files
-Generated\ Files/
+back_end/Generated\ Files/
 
 # MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
+back_end/[Tt]est[Rr]esult*/
+back_end/[Bb]uild[Ll]og.*
 
 # NUnit
-*.VisualState.xml
-TestResult.xml
-nunit-*.xml
+back_end/*.VisualState.xml
+back_end/TestResult.xml
+back_end/nunit-*.xml
 
 # Build Results of an ATL Project
-[Dd]ebugPS/
-[Rr]eleasePS/
-dlldata.c
+back_end/[Dd]ebugPS/
+back_end/[Rr]eleasePS/
+back_end/dlldata.c
 
 # Benchmark Results
-BenchmarkDotNet.Artifacts/
+back_end/BenchmarkDotNet.Artifacts/
 
 # .NET Core
-project.lock.json
-project.fragment.lock.json
-artifacts/
+back_end/project.lock.json
+back_end/project.fragment.lock.json
+back_end/artifacts/
 
 # ASP.NET Scaffolding
-ScaffoldingReadMe.txt
+back_end/ScaffoldingReadMe.txt
 
 # StyleCop
-StyleCopReport.xml
+back_end/StyleCopReport.xml
 
 # Files built by Visual Studio
-*_i.c
-*_p.c
-*_h.h
-*.ilk
-*.meta
-*.obj
-*.iobj
-*.pch
-*.pdb
-*.ipdb
-*.pgc
-*.pgd
-*.rsp
-*.sbr
-*.tlb
-*.tli
-*.tlh
-*.tmp
-*.tmp_proj
-*_wpftmp.csproj
-*.log
-*.vspscc
-*.vssscc
-.builds
-*.pidb
-*.svclog
-*.scc
+back_end/*_i.c
+back_end/*_p.c
+back_end/*_h.h
+back_end/*.ilk
+back_end/*.meta
+back_end/*.obj
+back_end/*.iobj
+back_end/*.pch
+back_end/*.pdb
+back_end/*.ipdb
+back_end/*.pgc
+back_end/*.pgd
+back_end/*.rsp
+back_end/*.sbr
+back_end/*.tlb
+back_end/*.tli
+back_end/*.tlh
+back_end/*.tmp
+back_end/*.tmp_proj
+back_end/*_wpftmp.csproj
+back_end/*.log
+back_end/*.vspscc
+back_end/*.vssscc
+back_end/.builds
+back_end/*.pidb
+back_end/*.svclog
+back_end/*.scc
 
 # Chutzpah Test files
-_Chutzpah*
+back_end/_Chutzpah*
 
 # Visual C++ cache files
-ipch/
-*.aps
-*.ncb
-*.opendb
-*.opensdf
-*.sdf
-*.cachefile
-*.VC.db
-*.VC.VC.opendb
+back_end/ipch/
+back_end/*.aps
+back_end/*.ncb
+back_end/*.opendb
+back_end/*.opensdf
+back_end/*.sdf
+back_end/*.cachefile
+back_end/*.VC.db
+back_end/*.VC.VC.opendb
 
 # Visual Studio profiler
-*.psess
-*.vsp
-*.vspx
-*.sap
+back_end/*.psess
+back_end/*.vsp
+back_end/*.vspx
+back_end/*.sap
 
 # Visual Studio Trace Files
-*.e2e
+back_end/*.e2e
 
 # TFS 2012 Local Workspace
-$tf/
+back_end/$tf/
 
 # Guidance Automation Toolkit
-*.gpState
+back_end/*.gpState
 
 # ReSharper is a .NET coding add-in
-_ReSharper*/
-*.[Rr]e[Ss]harper
-*.DotSettings.user
+back_end/_ReSharper*/
+back_end/*.[Rr]e[Ss]harper
+back_end/*.DotSettings.user
 
 # TeamCity is a build add-in
-_TeamCity*
+back_end/_TeamCity*
 
 # DotCover is a Code Coverage Tool
-*.dotCover
+back_end/*.dotCover
 
 # AxoCover is a Code Coverage Tool
-.axoCover/*
-!.axoCover/settings.json
+back_end/.axoCover/*
+back_end/!.axoCover/settings.json
 
 # Coverlet is a free, cross platform Code Coverage Tool
-coverage*.json
-coverage*.xml
-coverage*.info
+back_end/coverage*.json
+back_end/coverage*.xml
+back_end/coverage*.info
 
 # Visual Studio code coverage results
-*.coverage
-*.coveragexml
+back_end/*.coverage
+back_end/*.coveragexml
 
 # NCrunch
-_NCrunch_*
-.*crunch*.local.xml
-nCrunchTemp_*
+back_end/_NCrunch_*
+back_end/.*crunch*.local.xml
+back_end/nCrunchTemp_*
 
 # MightyMoose
-*.mm.*
-AutoTest.Net/
+back_end/*.mm.*
+back_end/AutoTest.Net/
 
 # Web workbench (sass)
-.sass-cache/
+back_end/.sass-cache/
 
 # Installshield output folder
-[Ee]xpress/
+back_end/[Ee]xpress/
 
 # DocProject is a documentation generator add-in
-DocProject/buildhelp/
-DocProject/Help/*.HxT
-DocProject/Help/*.HxC
-DocProject/Help/*.hhc
-DocProject/Help/*.hhk
-DocProject/Help/*.hhp
-DocProject/Help/Html2
-DocProject/Help/html
+back_end/DocProject/buildhelp/
+back_end/DocProject/Help/*.HxT
+back_end/DocProject/Help/*.HxC
+back_end/DocProject/Help/*.hhc
+back_end/DocProject/Help/*.hhk
+back_end/DocProject/Help/*.hhp
+back_end/DocProject/Help/Html2
+back_end/DocProject/Help/html
 
 # Click-Once directory
-publish/
+back_end/publish/
 
 # Publish Web Output
-*.[Pp]ublish.xml
-*.azurePubxml
+back_end/*.[Pp]ublish.xml
+back_end/*.azurePubxml
 # Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
-*.pubxml
-*.publishproj
+back_end/*.pubxml
+back_end/*.publishproj
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
 # checkin your Azure Web App publish settings, but sensitive information contained
@@ -192,18 +192,18 @@ publish/
 PublishScripts/
 
 # NuGet Packages
-*.nupkg
+back_end/*.nupkg
 # NuGet Symbol Packages
-*.snupkg
+back_end/*.snupkg
 # The packages folder can be ignored because of Package Restore
-**/[Pp]ackages/*
+back_end/**/[Pp]ackages/*
 # except build/, which is used as an MSBuild target.
-!**/[Pp]ackages/build/
+back_end/!**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/[Pp]ackages/repositories.config
 # NuGet v3's project.json files produces more ignorable files
-*.nuget.props
-*.nuget.targets
+back_end/*.nuget.props
+back_end/*.nuget.targets
 
 # Microsoft Azure Build Output
 csx/
@@ -224,20 +224,20 @@ _pkginfo.txt
 
 # Visual Studio cache files
 # files ending in .cache can be ignored
-*.[Cc]ache
+back_end/*.[Cc]ache
 # but keep track of directories ending in .cache
-!?*.[Cc]ache/
+back_end/!?*.[Cc]ache/
 
 # Others
-ClientBin/
-~$*
-*~
-*.dbmdl
-*.dbproj.schemaview
-*.jfm
-*.pfx
-*.publishsettings
-orleans.codegen.cs
+back_end/ClientBin/
+back_end/~$*
+back_end/*~
+back_end/*.dbmdl
+back_end/*.dbproj.schemaview
+back_end/*.jfm
+back_end/*.pfx
+back_end/*.publishsettings
+back_end/orleans.codegen.cs
 
 # Including strong name files can present a security risk
 # (https://github.com/github/gitignore/pull/2483#issue-259490424)
@@ -248,22 +248,22 @@ orleans.codegen.cs
 #bower_components/
 
 # RIA/Silverlight projects
-Generated_Code/
+back_end/Generated_Code/
 
 # Backup & report files from converting an old project file
 # to a newer Visual Studio version. Backup files are not needed,
 # because we have git ;-)
 _UpgradeReport_Files/
-Backup*/
+back_end/Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 ServiceFabricBackup/
 *.rptproj.bak
 
 # SQL Server files
-*.mdf
-*.ldf
-*.ndf
+back_end/*.mdf
+back_end/*.ldf
+back_end/*.ndf
 
 # Business Intelligence projects
 *.rdl.data
@@ -275,7 +275,7 @@ ServiceFabricBackup/
 *- [Bb]ackup ([0-9][0-9]).rdl
 
 # Microsoft Fakes
-FakesAssemblies/
+back_end/FakesAssemblies/
 
 # GhostDoc plugin setting file
 *.GhostDoc.xml
@@ -285,10 +285,10 @@ FakesAssemblies/
 node_modules/
 
 # Visual Studio 6 build log
-*.plg
+back_end/*.plg
 
 # Visual Studio 6 workspace options file
-*.opt
+back_end/*.opt
 
 # Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
 *.vbw
