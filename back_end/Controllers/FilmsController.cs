@@ -12,8 +12,8 @@ namespace back_end.Controllers
     [Route("api/[controller]")]
     public class FilmsController : ControllerBase
     {
-        FilmsContext db;
-        public FilmsController(FilmsContext context)
+        ApplicationContext db;
+        public FilmsController(ApplicationContext context)
         {
             db = context;
             if (!db.Films.Any())

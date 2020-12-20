@@ -1,0 +1,42 @@
+﻿using back_end.models;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace back_end.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class SessionsController : ControllerBase
+    {
+        ApplicationContext db;
+        public SessionsController(ApplicationContext context)
+        {
+            db = context;
+            if (!db.Sessions.Any())
+            {
+                db.Sessions.Add(new Session { DateTime = new DateTime(2020, 12, 12, 20, 0, 0), FilmId = 2});
+                db.Sessions.Add(new Session { DateTime = new DateTime(2020, 10, 10, 18, 0, 0), FilmId = 2 });
+                db.Sessions.Add(new Session { DateTime = new DateTime(2020, 10, 10, 18, 0, 0), FilmId = 10 });
+                db.SaveChanges();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Session>> Get()
+        {
+            return db.Sessions.ToList();
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Session> GetById(Int32 id)
+        {
+            Session seans = db.Sessions.FirstOrDefault(x => x.Id == id);
+            if (seans == null)
+                return NotFound();
+            return new ObjectResult(seans);
+        }
+    }
+}

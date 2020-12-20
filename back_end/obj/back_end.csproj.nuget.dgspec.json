@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\megag\\Desktop\\UNI_Course\\back_end\\back_end.csproj": {}
+    "D:\\UNI_Course\\back_end\\back_end.csproj": {}
   },
   "projects": {
-    "C:\\Users\\megag\\Desktop\\UNI_Course\\back_end\\back_end.csproj": {
+    "D:\\UNI_Course\\back_end\\back_end.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\megag\\Desktop\\UNI_Course\\back_end\\back_end.csproj",
+        "projectUniqueName": "D:\\UNI_Course\\back_end\\back_end.csproj",
         "projectName": "back_end",
-        "projectPath": "C:\\Users\\megag\\Desktop\\UNI_Course\\back_end\\back_end.csproj",
-        "packagesPath": "C:\\Users\\megag\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\megag\\Desktop\\UNI_Course\\back_end\\obj\\",
+        "projectPath": "D:\\UNI_Course\\back_end\\back_end.csproj",
+        "packagesPath": "C:\\Users\\sofia\\.nuget\\packages\\",
+        "outputPath": "D:\\UNI_Course\\back_end\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\megag\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sofia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +37,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
@@ -63,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

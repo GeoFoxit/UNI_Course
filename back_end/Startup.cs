@@ -30,7 +30,7 @@ namespace back_end
         {
             string con = "Host=localhost;Port=5432;Database=uni_project;Username=postgres;Password=12345;";
             // устанавливаем контекст данных
-            services.AddDbContext<FilmsContext>(options => options.UseNpgsql(con));
+            services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(con));
 
             services.AddControllers(); // используем контроллеры без представлений
         }
