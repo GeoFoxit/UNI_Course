@@ -36,5 +36,25 @@ namespace back_end.Controllers
                 return NotFound();
             return new ObjectResult(user);
         }
+
+        [HttpPost]
+        public ActionResult<User> AddUser(User user)
+        {
+            db.Users.Add(user);
+            db.SaveChanges();
+            return new ObjectResult(user);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<User> DeleteUser(Int32 id)
+        {
+            User user = db.Users.Find(id);
+            if (user == null)
+                return NotFound();
+
+            db.Users.Remove(user);
+            db.SaveChanges();
+            return new ObjectResult(user);
+        }
     }
 }

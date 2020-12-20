@@ -36,5 +36,25 @@ namespace back_end.Controllers
                 return NotFound();
             return new ObjectResult(booking);
         }
+
+        [HttpPost]
+        public ActionResult<Booking> AddBooking(Booking booking)
+        {
+            db.Bookings.Add(booking);
+            db.SaveChanges();
+            return new ObjectResult(booking);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Booking> DeleteBooking(Int32 id)
+        {
+            Booking booking = db.Bookings.Find(id);
+            if (booking == null)
+                return NotFound();
+
+            db.Bookings.Remove(booking);
+            db.SaveChanges();
+            return new ObjectResult(booking);
+        }
     }
 }

@@ -39,5 +39,25 @@ namespace back_end.Controllers
                 return NotFound();
             return new ObjectResult(film);
         }
+
+        [HttpPost]
+        public ActionResult<Film> AddFilm(Film film)
+        {
+            db.Films.Add(film);
+            db.SaveChanges();
+            return new ObjectResult(film);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Film> DeleteFilm(Int32 id)
+        {
+            Film film = db.Films.Find(id);
+            if (film == null)
+                return NotFound();
+
+            db.Films.Remove(film);
+            db.SaveChanges();
+            return new ObjectResult(film);
+        }
     }
 }

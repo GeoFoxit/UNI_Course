@@ -37,5 +37,25 @@ namespace back_end.Controllers
                 return NotFound();
             return new ObjectResult(seat);
         }
+
+        [HttpPost]
+        public ActionResult<Seat> AddSeat(Seat seat)
+        {
+            db.Seats.Add(seat);
+            db.SaveChanges();
+            return new ObjectResult(seat);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Seat> DeleteSeat(Int32 id)
+        {
+            Seat seat = db.Seats.Find(id);
+            if (seat == null)
+                return NotFound();
+
+            db.Seats.Remove(seat);
+            db.SaveChanges();
+            return new ObjectResult(seat);
+        }
     }
 }

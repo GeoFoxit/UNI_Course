@@ -38,5 +38,25 @@ namespace back_end.Controllers
                 return NotFound();
             return new ObjectResult(seans);
         }
+
+        [HttpPost]
+        public ActionResult<Session> AddSession(Session session)
+        {
+            db.Sessions.Add(session);
+            db.SaveChanges();
+            return new ObjectResult(session);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Session> DeleteSession(Int32 id)
+        {
+            Session session = db.Sessions.Find(id);
+            if (session == null)
+                return NotFound();
+
+            db.Sessions.Remove(session);
+            db.SaveChanges();
+            return new ObjectResult(session);
+        }
     }
 }
