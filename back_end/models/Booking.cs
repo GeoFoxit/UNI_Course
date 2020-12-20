@@ -9,6 +9,5 @@ namespace back_end.models
     {
         public Int32 Id { get; set; }
         public Int32 SeatId { get; set; }
-        public Int32 Code { get; set; }
     }
 }
