@@ -24,11 +24,11 @@ namespace back_end.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Seat>> Get()
-        {
-            return db.Seats.ToList();
-        }
+        //[HttpGet]
+        //public ActionResult<IEnumerable<Seat>> Get()
+        //{
+        //    return db.Seats.ToList();
+        //}
 
         //[HttpGet("{id}")]
         //public ActionResult<Seat> GetById(Int32 id)

@@ -1,4 +1,5 @@
 ﻿using back_end.models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -40,6 +41,7 @@ namespace back_end.Controllers
             return new ObjectResult(film);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult<Film> AddFilm(Film film)
         {
@@ -48,6 +50,7 @@ namespace back_end.Controllers
             return new ObjectResult(film);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult<Film> DeleteFilm(Int32 id)
         {

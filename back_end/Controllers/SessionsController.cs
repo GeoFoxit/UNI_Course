@@ -1,4 +1,5 @@
 ﻿using back_end.models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace back_end.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<Session>> Get()
         {
@@ -44,6 +46,7 @@ namespace back_end.Controllers
             return db.Sessions.ToList().FindAll(x => x.FilmId == filmId);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult<Session> AddSession(Session session)
         {
@@ -52,7 +55,7 @@ namespace back_end.Controllers
 
             for (Int16 c = 1; c < 37; c++)
             {
-                Seat seat = new Seat { IsFree = true, Number = c, Price = 100, SessionId = session.Id };
+                Seat seat = new Seat { IsFree = true, Number = c, Price = 120, SessionId = session.Id };
                 db.Seats.Add(seat);
             }
             
@@ -60,6 +63,7 @@ namespace back_end.Controllers
             return new ObjectResult(session);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult<Session> DeleteSession(Int32 id)
         {
