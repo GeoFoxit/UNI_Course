@@ -1,58 +1,60 @@
-using back_end.models;
+﻿using back_end.models;
 using back_end.Services;
 using back_end.Tests.Services;
 using Microsoft.EntityFrameworkCore;
 using NSubstitute;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace back_end.Tests
 {
-    public class FilmsServiceTest
+    public class SessionsServiceTest
     {
-        private MockFilms mockFilms;
-        private DbSet<Film> mockDbSet;
+        private MockSessions mockSessions;
+        private DbSet<Session> mockDbSet;
         private ApplicationContext mockAppContext;
-        private FilmsService films;
+        private SessionsService sessions;
 
         [SetUp]
         public void Setup()
         {
-            this.mockFilms = new MockFilms();
-            this.mockDbSet = NSubstituteUtils.CreateMockDbSet(mockFilms.Films);
+            this.mockSessions = new MockSessions();
+            this.mockDbSet = NSubstituteUtils.CreateMockDbSet(mockSessions.Sessions);
             this.mockAppContext = Substitute.For<ApplicationContext>();
-            mockAppContext.Films.Returns(mockDbSet);
-            this.films = new FilmsService(mockAppContext);
+            mockAppContext.Sessions.Returns(mockDbSet);
+            this.sessions = new SessionsService(mockAppContext);
         }
 
         [Test]
-        public void GetAll_Should_Return_All_Films()
+        public void GetAll_Should_Return_All_Sessions()
         {
             // Act
-            var data = films.GetAll();
+            var data = sessions.GetAll();
+
+            // Assert
+            Assert.AreEqual(data.Count, 3);
+        }
+
+        [Test]
+        public void GetListById_Should_Return_Correct_Sessions()
+        {
+            // Act
+            var data = sessions.GetListById(2);
 
             // Assert
             Assert.AreEqual(data.Count, 2);
         }
 
         [Test]
-        public void GetById_Should_Return_Correct_Film()
+        public void GetListById_Should_Return_Empty_List_On_Wrong_Id()
         {
             // Act
-            var data = films.GetById(1);
+            var data = sessions.GetListById(5);
 
             // Assert
-            Assert.AreEqual(data.Naming, "Star Wars");
-        }
-
-        [Test]
-        public void GetById_Should_Return_Null_On_Wrong_Id()
-        {
-            // Act
-            var data = films.GetById(5);
-
-            // Assert
-            Assert.AreEqual(data, null);
+            Assert.AreEqual(data.Count, 0);
         }
 
         [Test]
@@ -67,9 +69,9 @@ namespace back_end.Tests
         }
 
         [Test]
-        public void GetListById_Throws_NotImplementedException()
+        public void GetById_Throws_NotImplementedException()
         {
-            Assert.That(() => films.GetListById(1),
+            Assert.That(() => sessions.GetById(1),
                 Throws.Exception
                 .TypeOf<NotImplementedException>());
         }
@@ -77,7 +79,7 @@ namespace back_end.Tests
         [Test]
         public void Update_Throws_NotImplementedException()
         {
-            Assert.That(() => films.Update(1),
+            Assert.That(() => sessions.Update(1),
                 Throws.Exception
                 .TypeOf<NotImplementedException>());
         }
@@ -85,7 +87,7 @@ namespace back_end.Tests
         [Test]
         public void GetUser_Throws_NotImplementedException()
         {
-            Assert.That(() => films.GetUser("user", "pass"),
+            Assert.That(() => sessions.GetUser("user", "pass"),
                 Throws.Exception
                 .TypeOf<NotImplementedException>());
         }

@@ -17,7 +17,7 @@ namespace back_end.Controllers
         public SeatsController(ApplicationContext context)
         {
             service = new SeatsService(context);
-            bookingService = new BookingService(context);
+            bookingService = new BookingsService(context);
         }
 
         //[HttpGet]

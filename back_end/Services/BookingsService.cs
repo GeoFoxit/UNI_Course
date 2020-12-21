@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace back_end.Services
 {
-    public class BookingService : IService<Booking>
+    public class BookingsService : IService<Booking>
     {
         IApplicationContext db;
-        public BookingService(IApplicationContext context)
+        public BookingsService(IApplicationContext context)
         {
             this.db = context;
             if (!db.Bookings.Any())

@@ -26,7 +26,7 @@ namespace back_end.Services
 
         public User GetById(int id) 
         {
-            User user = db.Users.Find(id);
+            User user = db.Users.FirstOrDefault(x => x.Id == id);
             return user;
         }
 
