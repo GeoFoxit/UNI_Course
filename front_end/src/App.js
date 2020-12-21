@@ -1,29 +1,43 @@
-import Axios from 'axios'
+//React
 import React, { Component } from 'react'
+//MaterialUI
+import withStyles from '@material-ui/core/styles/withStyles'
+import Header from './shared/Header'
+import FilmsPage from './pages/FilmsPage'
+import SessionsPage from './pages/SessionsPage'
+import EditFilmsPage from './pages/EditFilmsPage'
+import EditSessionsPage from './pages/EditSessionsPage'
+import {
+    Switch,
+    Route,
+    Redirect
+} from "react-router-dom";
+import LoginPage from './pages/LoginPage';
+import { Toolbar } from '@material-ui/core';
 
-export default class App extends Component {
+const styles = (theme) => ({})
 
-
-    state = {
-        films: []
-    }
-
-    componentDidMount = () => {
-        Axios
-            .get("http://localhost:50271/api/films")
-            .then(data => {
-                console.dir(data)
-                this.setState({
-                    films: data.data
-                })
-            })
-    }
+class App extends Component {
 
     render() {
         return (
-            <div>
-                {this.state.films.map(film => <h1 key={film.id}>{film.naming}</h1>)}
-            </div>
+            <>
+                <Header />
+                {/* For margin */}
+                <Toolbar />
+                <Switch>
+                    <Route exact path="/films" component={FilmsPage} />
+                    <Route path="/films/:filmId" component={SessionsPage} />
+                    {/* <Route path="/sessions/:sessionId" component={PlacesPage} /> */}
+                    {/* <Route path="/code" component={CodePage} /> */}
+                    <Route path="/admin/login" component={LoginPage} />
+                    <Route path="/admin/films" component={EditFilmsPage} />
+                    <Route path="/admin/sessions" component={EditSessionsPage} />
+                    <Redirect exact path="/" to="/films" />
+                </Switch>
+            </>
         )
     }
 }
+
+export default withStyles(styles, { withTheme: true })(App)
