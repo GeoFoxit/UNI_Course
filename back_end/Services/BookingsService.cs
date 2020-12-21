@@ -21,6 +21,9 @@ namespace back_end.Services
 
         public Booking Add(Booking booking)
         {
+            if (booking == null)
+                throw new ArgumentNullException();
+
             db.Bookings.Add(booking);
             db.SaveChanges();
             return booking;

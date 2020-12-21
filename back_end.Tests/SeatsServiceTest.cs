@@ -48,9 +48,19 @@ namespace back_end.Tests
         }
 
         [Test]
-        public void Update()
+        public void Update_Calls_SaveChanges()
         {
+            // Arrange
+            Int32 id = 3;
 
+            // Act
+            var data = seats.Update(id);
+
+            // Assert
+            mockAppContext.Received().Seats.Find(id);
+            mockAppContext.Received().SaveChanges();
+            Assert.AreEqual(data.Number, 3);
+            Assert.AreEqual(data.IsFree, false);           
         }
 
         [Test]

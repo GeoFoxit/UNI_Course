@@ -29,6 +29,9 @@ namespace back_end.Services
         }
         public Session Add(Session session)
         {
+            if (session == null)
+                throw new ArgumentNullException();
+
             db.Sessions.Add(session);
             db.SaveChanges();
 
@@ -44,7 +47,7 @@ namespace back_end.Services
         }
         public Session Delete(Int32 id)
         {
-            Session session = db.Sessions.Find(id);
+            Session session = db.Sessions.FirstOrDefault(x => x.Id == id);
             if (session == null)
                 return session;
 

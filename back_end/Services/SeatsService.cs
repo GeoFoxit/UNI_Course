@@ -45,7 +45,7 @@ namespace back_end.Services
 
         public Seat Update(Int32 id)
         {
-            Seat seat = db.Seats.Find(id);
+            Seat seat = db.Seats.FirstOrDefault(x => x.Id == id);
             if (seat == null)
                 return seat;
 

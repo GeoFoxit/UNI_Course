@@ -58,14 +58,40 @@ namespace back_end.Tests
         }
 
         [Test]
-        public void Add()
+        public void Add_Calls_SaveChanges()
         {
+            // Arrange
+            Session sessionToAdd = new Session { Id = 4, DateTime = DateTime.Now, FilmId = 1 };
+
+            // Act
+            var data = sessions.Add(sessionToAdd);
+
+            // Assert
+            mockAppContext.Received().Sessions.Add(sessionToAdd);
+            mockAppContext.Received().SaveChanges();
         }
 
         [Test]
-        public void Delete()
+        public void Add_Throws_ArgumentNullException_On_Null_Parameter()
         {
+            Assert.That(() => sessions.Add(null),
+                Throws.Exception
+                .TypeOf<ArgumentNullException>());
+        }
 
+        [Test]
+        public void Delete_Calls_Remove_And_SaveChanges()
+        {
+            // Arrange
+            Int32 id = 3;
+
+            // Act
+            var data = sessions.Delete(id);
+
+            // Assert
+            mockAppContext.Received().Sessions.Find(id);
+            mockAppContext.Received().Sessions.Remove(Arg.Any<Session>());
+            mockAppContext.Received().SaveChanges();
         }
 
         [Test]

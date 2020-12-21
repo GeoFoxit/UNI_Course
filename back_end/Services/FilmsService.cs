@@ -30,13 +30,16 @@ namespace back_end.Services
         }
         public Film Add(Film film)
         {
+            if (film == null)
+                throw new ArgumentNullException();
+
             db.Films.Add(film);
             db.SaveChanges();
             return film;
         }
         public Film Delete(Int32 id)
         {
-            Film film = db.Films.Find(id);
+            Film film = db.Films.FirstOrDefault(x => x.Id == id);
             if (film == null)
                 return film;
 

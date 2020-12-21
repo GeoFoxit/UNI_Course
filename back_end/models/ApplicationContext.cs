@@ -17,14 +17,11 @@ namespace back_end.models
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
-            //Database.EnsureCreated();
         }
 
         public ApplicationContext()
             : base()
         {
-            //Database.EnsureCreated();
         }
-
     }
 }

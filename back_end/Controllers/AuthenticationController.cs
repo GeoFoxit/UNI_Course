@@ -99,7 +99,7 @@ namespace back_end.Controllers
                 return claimsIdentity;
             }
 
-            // если пользователя не найдено
+            // if no user found
             return null;
         }
     }

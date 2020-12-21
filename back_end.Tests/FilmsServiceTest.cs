@@ -56,14 +56,40 @@ namespace back_end.Tests
         }
 
         [Test]
-        public void Add()
+        public void Add_Calls_SaveChanges()
         {
+            // Arrange
+            Film filmToAdd = new Film { Id = 3, Naming = "Hobbit", Genre = "Fantasy", Rate = 5 };
+
+            // Act
+            var data = films.Add(filmToAdd);
+
+            // Assert
+            mockAppContext.Received().Films.Add(filmToAdd);
+            mockAppContext.Received().SaveChanges();
         }
 
         [Test]
-        public void Delete()
+        public void Add_Throws_ArgumentNullException_On_Null_Parameter()
         {
+            Assert.That(() => films.Add(null),
+                Throws.Exception
+                .TypeOf<ArgumentNullException>());
+        }
 
+        [Test]
+        public void Delete_Calls_Remove_And_SaveChanges()
+        {
+            // Arrange
+            Int32 id = 2;
+
+            // Act
+            var data = films.Delete(id);
+
+            // Assert
+            mockAppContext.Received().Films.Find(id);
+            mockAppContext.Received().Films.Remove(Arg.Any<Film>());
+            mockAppContext.Received().SaveChanges();
         }
 
         [Test]

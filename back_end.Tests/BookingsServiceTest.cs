@@ -28,9 +28,25 @@ namespace back_end.Tests
         }
 
         [Test]
-        public void Add()
+        public void Add_Calls_SaveChanges()
         {
+            // Arrange
+            Booking bookingToAdd = new Booking { Id = 2, SeatId = 2 };
 
+            // Act
+            var data = bookings.Add(bookingToAdd);
+
+            // Assert
+            mockAppContext.Received().Bookings.Add(bookingToAdd);
+            mockAppContext.Received().SaveChanges();
+        }
+
+        [Test]
+        public void Add_Throws_ArgumentNullException_On_Null_Parameter()
+        {
+            Assert.That(() => bookings.Add(null),
+                Throws.Exception
+                .TypeOf<ArgumentNullException>());
         }
 
         [Test]
