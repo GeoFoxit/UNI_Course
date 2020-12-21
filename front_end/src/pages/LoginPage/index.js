@@ -38,34 +38,28 @@ class LoginPage extends Component {
                 if (res.status === 200) {
                     localStorage.setItem('username', res.data.username)
                     localStorage.setItem('token', res.data.access_token)
+                    this.props.login()
+                    this.props.history.push('/admin/films')
                 }
             })
-            .then(() => {
-                this.props.history.push('/admin/films')
-            })
             .catch(err => {
+                console.dir(err)
                 this.setState({
                     isInvalidCredentials: true
                 })
             })
-
     }
 
     handleChange = e => {
-
         const { name, value } = e.target
-
         let error = null
-
         if (!value.match(regexp)) {
             error = "Поле повинно містити лише від 6 до 8 латинських літери та/або цифри."
         }
-
         this.setState({
             [name]: value,
             [name + '_error']: error
         })
-
     }
 
     closeAlert = () => {
