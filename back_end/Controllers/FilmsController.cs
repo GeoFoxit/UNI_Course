@@ -1,4 +1,5 @@
 ﻿using back_end.models;
+using back_end.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,29 +14,22 @@ namespace back_end.Controllers
     [Route("api/[controller]")]
     public class FilmsController : ControllerBase
     {
-        ApplicationContext db;
+        IService<Film> service;
         public FilmsController(ApplicationContext context)
         {
-            db = context;
-            if (!db.Films.Any())
-            {
-                db.Films.Add(new Film { Naming="Star Wars", Genre="Action", Rate=4 });
-                db.Films.Add(new Film { Naming="Star Wars 2", Genre="Action", Rate=5 });
-                db.Films.Add(new Film { Naming="Star Wars 4", Genre="Action", Rate=2 });
-                db.SaveChanges();
-            }
+            service = new FilmsService(context);
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Film>> Get()
         {
-            return db.Films.ToList();
+            return new ActionResult<IEnumerable<Film>>(service.GetAll());
         }
 
         [HttpGet("{id}")]
         public ActionResult<Film> GetById(Int32 id)
         {
-            Film film = db.Films.FirstOrDefault(x => x.Id == id);
+            Film film = service.GetById(id);
             if (film == null)
                 return NotFound();
             return new ObjectResult(film);
@@ -45,21 +39,16 @@ namespace back_end.Controllers
         [HttpPost]
         public ActionResult<Film> AddFilm(Film film)
         {
-            db.Films.Add(film);
-            db.SaveChanges();
-            return new ObjectResult(film);
+            return new ObjectResult(service.Add(film));
         }
 
         [Authorize]
         [HttpDelete("{id}")]
         public ActionResult<Film> DeleteFilm(Int32 id)
         {
-            Film film = db.Films.Find(id);
+            Film film = service.Delete(id);
             if (film == null)
                 return NotFound();
-
-            db.Films.Remove(film);
-            db.SaveChanges();
             return new ObjectResult(film);
         }
     }
