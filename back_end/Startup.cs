@@ -80,7 +80,17 @@ namespace back_end
             app.UseAuthorization();
 
             // подключаем CORS
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseCors(builder =>
+            builder
+                //.WithOrigins("http://localhost:3000")
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                //.AllowCredentials()
+);
+
+            
+
 
             app.UseEndpoints(endpoints =>
             {

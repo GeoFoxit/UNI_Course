@@ -13,7 +13,7 @@ using System.Security.Claims;
 namespace back_end.Controllers
 {
     [ApiController]
-    [Route("auth")]
+    [Route("api/auth")]
     public class AuthenticationController : ControllerBase
     {
         ApplicationContext db;

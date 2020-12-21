@@ -19,9 +19,13 @@ namespace back_end.Controllers
             db = context;
             if (!db.Films.Any())
             {
-                db.Films.Add(new Film { Naming= "The Dark Knight", Genre="Action", Rate=5 });
-                db.Films.Add(new Film { Naming= "The Godfather", Genre= "Drama", Rate=4 });
-                db.Films.Add(new Film { Naming= "The Shawshank Redemption", Genre= "Drama", Rate=4 });
+                db.Films.Add(new Film { Naming= "The Dark Knight", Genre= "Триллер", Rate=5 });
+                db.Films.Add(new Film { Naming= "The Godfather", Genre= "Драма", Rate=4 });
+                db.Films.Add(new Film { Naming= "The Shawshank Redemption", Genre= "Драма", Rate=4 });
+                db.Films.Add(new Film { Naming= "Star Wars", Genre= "Фентезі", Rate=1 });
+                db.Films.Add(new Film { Naming= "Sonic", Genre= "Фентезі", Rate=2 });
+                db.Films.Add(new Film { Naming= "Megaladon", Genre= "Екшин", Rate=3 });
+                db.Films.Add(new Film { Naming= "Joe", Genre= "Комедія", Rate=5 });
                 db.SaveChanges();
             }
         }
