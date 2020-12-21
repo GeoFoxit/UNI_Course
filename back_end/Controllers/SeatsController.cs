@@ -14,7 +14,7 @@ namespace back_end.Controllers
         ApplicationContext db;
         public SeatsController(ApplicationContext context)
         {
-            //db = context;
+            db = context;
             //if (!db.Seats.Any())
             //{
             //    db.Seats.Add(new Seat { Number = 5, SessionId = 7, Price = 100, IsFree = true });

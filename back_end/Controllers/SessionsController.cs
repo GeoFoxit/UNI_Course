@@ -15,7 +15,7 @@ namespace back_end.Controllers
         ApplicationContext db;
         public SessionsController(ApplicationContext context)
         {
-            //db = context;
+            db = context;
             //if (!db.Sessions.Any())
             //{
             //    db.Sessions.Add(new Session { DateTime = new DateTime(2020, 12, 12, 20, 0, 0), FilmId = 2 });
