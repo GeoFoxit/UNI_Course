@@ -14,12 +14,12 @@ namespace back_end.Controllers
         ApplicationContext db;
         public BookingsController(ApplicationContext context)
         {
-            db = context;
-            if (!db.Bookings.Any())
-            {
-                db.Bookings.Add(new Booking { SeatId = 1 });
-                db.SaveChanges();
-            }
+            //db = context;
+            //if (!db.Bookings.Any())
+            //{
+            //    db.Bookings.Add(new Booking { SeatId = 1 });
+            //    db.SaveChanges();
+            //}
         }
 
         //[HttpGet]

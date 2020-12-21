@@ -27,40 +27,40 @@ namespace back_end.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<User>> Get()
-        {
-            return db.Users.ToList();
-        }
+        //[HttpGet]
+        //public ActionResult<IEnumerable<User>> Get()
+        //{
+        //    return db.Users.ToList();
+        //}
 
-        [HttpGet("{id}")]
-        public ActionResult<User> GetById(Int32 id)
-        {
-            User user = db.Users.FirstOrDefault(x => x.Id == id);
-            if (user == null)
-                return NotFound();
-            return new ObjectResult(user);
-        }
+        //[HttpGet("{id}")]
+        //public ActionResult<User> GetById(Int32 id)
+        //{
+        //    User user = db.Users.FirstOrDefault(x => x.Id == id);
+        //    if (user == null)
+        //        return NotFound();
+        //    return new ObjectResult(user);
+        //}
 
-        [HttpPost]
-        public ActionResult<User> AddUser(User user)
-        {
-            db.Users.Add(user);
-            db.SaveChanges();
-            return new ObjectResult(user);
-        }
+        //[HttpPost]
+        //public ActionResult<User> AddUser(User user)
+        //{
+        //    db.Users.Add(user);
+        //    db.SaveChanges();
+        //    return new ObjectResult(user);
+        //}
 
-        [HttpDelete("{id}")]
-        public ActionResult<User> DeleteUser(Int32 id)
-        {
-            User user = db.Users.Find(id);
-            if (user == null)
-                return NotFound();
+        //[HttpDelete("{id}")]
+        //public ActionResult<User> DeleteUser(Int32 id)
+        //{
+        //    User user = db.Users.Find(id);
+        //    if (user == null)
+        //        return NotFound();
 
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return new ObjectResult(user);
-        }
+        //    db.Users.Remove(user);
+        //    db.SaveChanges();
+        //    return new ObjectResult(user);
+        //}
 
         [HttpPost("token")]
         public IActionResult Token(User user)
