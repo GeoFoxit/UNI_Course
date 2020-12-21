@@ -60,6 +60,8 @@ namespace back_end
                     });
 
             services.AddControllers(); // используем контроллеры без представлений
+
+            services.AddCors(); // добавляем сервисы CORS
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,9 +76,11 @@ namespace back_end
 
             app.UseRouting();
 
-            //app.useauthorization();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            // подключаем CORS
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
