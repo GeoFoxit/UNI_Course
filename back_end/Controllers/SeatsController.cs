@@ -21,7 +21,7 @@ namespace back_end.Controllers
         }
 
         //[HttpGet]
-        //public ActionResult<IEnumerable<Seat>> Get()
+        //public ActionResult<List<Seat>> Get()
         //{
         //    return db.Seats.ToList();
         //}
@@ -36,9 +36,9 @@ namespace back_end.Controllers
         //}
 
         [HttpGet("bysession/{sessionId}")]
-        public ActionResult<IEnumerable<Seat>> GetBySessionId(Int32 sessionId)
+        public ActionResult<List<Seat>> GetBySessionId(Int32 sessionId)
         {
-            return new ActionResult<IEnumerable<Seat>>(service.GetListById(sessionId));
+            return new ActionResult<List<Seat>>(service.GetListById(sessionId));
         }
 
         //[HttpPost]

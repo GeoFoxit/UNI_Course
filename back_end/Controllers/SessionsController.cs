@@ -21,9 +21,9 @@ namespace back_end.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult<IEnumerable<Session>> Get()
+        public ActionResult<List<Session>> Get()
         {
-            return new ActionResult<IEnumerable<Session>>(service.GetAll());
+            return new ActionResult<List<Session>>(service.GetAll());
         }
 
         //[HttpGet("{id}")]
@@ -36,9 +36,9 @@ namespace back_end.Controllers
         //}
 
         [HttpGet("byfilm/{filmId}")]
-        public ActionResult<IEnumerable<Session>> GetByFilmId(Int32 filmId)
+        public ActionResult<List<Session>> GetByFilmId(Int32 filmId)
         {
-            return new ActionResult<IEnumerable<Session>>(service.GetListById(filmId));
+            return new ActionResult<List<Session>>(service.GetListById(filmId));
         }
 
         [Authorize]

@@ -21,9 +21,9 @@ namespace back_end.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Film>> Get()
+        public ActionResult<List<Film>> Get()
         {
-            return new ActionResult<IEnumerable<Film>>(service.GetAll());
+            return new ActionResult<List<Film>>(service.GetAll());
         }
 
         [HttpGet("{id}")]

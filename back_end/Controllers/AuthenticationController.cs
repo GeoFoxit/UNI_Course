@@ -22,7 +22,7 @@ namespace back_end.Controllers
         }
 
         //[HttpGet]
-        //public ActionResult<IEnumerable<User>> Get()
+        //public ActionResult<List<User>> Get()
         //{
         //    return db.Users.ToList();
         //}

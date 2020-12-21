@@ -23,7 +23,7 @@ namespace back_end.Controllers
         }
 
         //[HttpGet]
-        //public ActionResult<IEnumerable<Booking>> Get()
+        //public ActionResult<List<Booking>> Get()
         //{
         //    return db.Bookings.ToList();
         //}
