@@ -19,9 +19,9 @@ namespace back_end.Controllers
             db = context;
             if (!db.Films.Any())
             {
-                db.Films.Add(new Film { Naming="Star Wars", Genre="Action", Rate=4 });
-                db.Films.Add(new Film { Naming="Star Wars 2", Genre="Action", Rate=5 });
-                db.Films.Add(new Film { Naming="Star Wars 4", Genre="Action", Rate=2 });
+                db.Films.Add(new Film { Naming= "The Dark Knight", Genre="Action", Rate=5 });
+                db.Films.Add(new Film { Naming= "The Godfather", Genre= "Drama", Rate=4 });
+                db.Films.Add(new Film { Naming= "The Shawshank Redemption", Genre= "Drama", Rate=4 });
                 db.SaveChanges();
             }
         }
