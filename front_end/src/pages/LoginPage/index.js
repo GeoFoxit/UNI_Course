@@ -36,10 +36,12 @@ class LoginPage extends Component {
             .post('auth/token', authData)
             .then(res => {
                 if (res.status === 200) {
-                    localStorage.setItem('token', res.data.access_token)
                     localStorage.setItem('username', res.data.username)
-                    this.props.history.push('/admin/films')
+                    localStorage.setItem('token', res.data.access_token)
                 }
+            })
+            .then(() => {
+                this.props.history.push('/admin/films')
             })
             .catch(err => {
                 this.setState({

@@ -8,8 +8,6 @@ const styles = (theme) => ({})
 
 class EditFilmsPage extends Component {
 
-    state = {}
-
     render() {
 
         const { classes } = this.props

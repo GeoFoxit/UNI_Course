@@ -10,8 +10,6 @@ const styles = (theme) => ({})
 class Film extends Component {
 
     handleClick = () => {
-        console.log("AMEN")
-
         const { history, film } = this.props
 
         history.push('/films/' + film.id)

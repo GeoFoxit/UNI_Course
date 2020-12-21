@@ -2,14 +2,12 @@
 import React, { Component } from 'react'
 //MaterialUI
 import withStyles from '@material-ui/core/styles/withStyles'
-import clsx from 'clsx';
+import { withRouter } from "react-router";
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 const styles = (theme) => ({})
 
 class Header extends Component {
-
-    state = {}
 
     render() {
 
@@ -45,4 +43,4 @@ class Header extends Component {
     }
 }
 
-export default withStyles(styles, { withTheme: true })(Header)
+export default withStyles(styles, { withTheme: true })(withRouter(Header))

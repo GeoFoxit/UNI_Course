@@ -7,6 +7,8 @@ import FilmsPage from './pages/FilmsPage'
 import SessionsPage from './pages/SessionsPage'
 import EditFilmsPage from './pages/EditFilmsPage'
 import EditSessionsPage from './pages/EditSessionsPage'
+import PlacesPage from './pages/PlacesPage'
+import CodePage from './pages/CodePage'
 import {
     Switch,
     Route,
@@ -27,13 +29,13 @@ class App extends Component {
                 <Toolbar />
                 <Switch>
                     <Route exact path="/films" component={FilmsPage} />
-                    <Route path="/films/:filmId" component={SessionsPage} />
-                    {/* <Route path="/sessions/:sessionId" component={PlacesPage} /> */}
-                    {/* <Route path="/code" component={CodePage} /> */}
-                    <Route path="/admin/login" component={LoginPage} />
-                    <Route path="/admin/films" component={EditFilmsPage} />
-                    <Route path="/admin/sessions" component={EditSessionsPage} />
-                    <Redirect exact path="/" to="/films" />
+                    <Route exact path="/films/:filmId" component={SessionsPage} />
+                    <Route exact path="/sessions/:sessionId" component={PlacesPage} />
+                    <Route exact path="/code" component={CodePage} />
+                    {/* <Route exact path="/admin/login" component={LoginPage} /> */}
+                    {/* <Route exact path="/admin/films" component={EditFilmsPage} /> */}
+                    {/* <Route exact path="/admin/sessions" component={EditSessionsPage} /> */}
+                    <Redirect to="/films" />
                 </Switch>
             </>
         )

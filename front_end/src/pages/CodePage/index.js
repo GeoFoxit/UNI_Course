@@ -6,17 +6,20 @@ import clsx from 'clsx';
 
 const styles = (theme) => ({})
 
-class EditSessionsPage extends Component {
+class CodePage extends Component {
+
+    state = {}
+
     render() {
 
         const { classes } = this.props
 
         return (
             <>
-                EditSessionsPage
+                CodePage
             </>
         )
     }
 }
 
-export default withStyles(styles, { withTheme: true })(EditSessionsPage)
+export default withStyles(styles, { withTheme: true })(CodePage)

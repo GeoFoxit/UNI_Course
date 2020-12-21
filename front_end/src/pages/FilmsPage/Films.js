@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 //MaterialUI
 import withStyles from '@material-ui/core/styles/withStyles'
-import Progress from '../../utils/Progress'
+import Progress from '../../shared/Progress'
 import Film from './Film'
 
 const styles = (theme) => ({})
