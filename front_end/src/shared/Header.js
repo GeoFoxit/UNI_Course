@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 //MaterialUI
 import withStyles from '@material-ui/core/styles/withStyles'
 import { withRouter } from "react-router";
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
 
 const styles = (theme) => ({})
 
@@ -37,6 +37,15 @@ class Header extends Component {
                     >
                         BCinema
                     </Typography>
+                    {this.props.auth.isAuth ? (
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={this.props.auth.logout}
+                        >
+                            Вихід
+                        </Button>
+                    ) : null}
                 </Toolbar>
             </AppBar>
         )
