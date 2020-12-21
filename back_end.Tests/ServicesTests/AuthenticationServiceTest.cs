@@ -86,5 +86,47 @@ namespace back_end.Tests
             // Assert
             Assert.IsNull(data);
         }
+
+        [Test]
+        public void Add_Throws_NotImplementedException()
+        {
+            User user = new User { Id = 2, Login = "aaa", Password = "bbb" };
+
+            Assert.That(() => users.Add(user),
+                Throws.Exception
+                .TypeOf<NotImplementedException>());
+        }
+
+        [Test]
+        public void Delete_Throws_NotImplementedException()
+        {
+            Assert.That(() => users.Delete(1),
+                Throws.Exception
+                .TypeOf<NotImplementedException>());
+        }
+
+        [Test]
+        public void Update_Throws_NotImplementedException()
+        {
+            Assert.That(() => users.Update(1),
+                Throws.Exception
+                .TypeOf<NotImplementedException>());
+        }
+
+        [Test]
+        public void GetAll_Throws_NotImplementedException()
+        {
+            Assert.That(() => users.GetAll(),
+                Throws.Exception
+                .TypeOf<NotImplementedException>());
+        }
+
+        [Test]
+        public void GetListById_Throws_NotImplementedException()
+        {
+            Assert.That(() => users.GetListById(1),
+                Throws.Exception
+                .TypeOf<NotImplementedException>());
+        }
     }
 }

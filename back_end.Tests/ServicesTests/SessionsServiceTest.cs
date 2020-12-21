@@ -45,6 +45,8 @@ namespace back_end.Tests
 
             // Assert
             Assert.AreEqual(data.Count, 2);
+            Assert.AreEqual(data[0].FilmId, 2);
+            Assert.NotNull(data[0].DateTime);
         }
 
         [Test]
@@ -92,6 +94,21 @@ namespace back_end.Tests
             mockAppContext.Received().Sessions.Find(id);
             mockAppContext.Received().Sessions.Remove(Arg.Any<Session>());
             mockAppContext.Received().SaveChanges();
+        }
+
+        [Test]
+        public void Delete_Not_Calls_SaveChanges_On_Wrong_Id()
+        {
+            // Arrange
+            Int32 id = 10;
+
+            // Act
+            var data = sessions.Delete(id);
+
+            // Assert
+            mockAppContext.Received().Sessions.Find(id);
+            mockAppContext.Received().Sessions.Remove(Arg.Any<Session>());
+            mockAppContext.DidNotReceive().SaveChanges();
         }
 
         [Test]

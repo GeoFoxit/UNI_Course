@@ -12,11 +12,6 @@ namespace back_end.Services
         public AuthenticationService(IApplicationContext context)
         {
             this.db = context;
-            if (!db.Users.Any())
-            {
-                db.Users.Add(new User { Login = "adminn", Password = "password" });
-                db.SaveChanges();
-            }
         }
 
         public User GetUser(string username, string password)

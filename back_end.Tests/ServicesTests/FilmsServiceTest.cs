@@ -43,6 +43,8 @@ namespace back_end.Tests
 
             // Assert
             Assert.AreEqual(data.Naming, "Star Wars");
+            Assert.AreEqual(data.Genre, "Action");
+            Assert.AreEqual(data.Rate, 4);
         }
 
         [Test]
@@ -90,6 +92,21 @@ namespace back_end.Tests
             mockAppContext.Received().Films.Find(id);
             mockAppContext.Received().Films.Remove(Arg.Any<Film>());
             mockAppContext.Received().SaveChanges();
+        }
+
+        [Test]
+        public void Delete_Not_Calls_SaveChanges_OnWrongId()
+        {
+            // Arrange
+            Int32 id = 10;
+
+            // Act
+            var data = films.Delete(id);
+
+            // Assert
+            mockAppContext.Received().Films.Find(id);
+            mockAppContext.Received().Films.Remove(Arg.Any<Film>());
+            mockAppContext.DidNotReceive().SaveChanges();
         }
 
         [Test]

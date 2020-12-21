@@ -12,13 +12,6 @@ namespace back_end.Services
         public SeatsService(IApplicationContext context)
         {
             this.db = context;
-            if (!db.Seats.Any())
-            {
-                db.Seats.Add(new Seat { Number = 5, SessionId = 7, Price = 100, IsFree = true });
-                db.Seats.Add(new Seat { Number = 6, SessionId = 8, Price = 100, IsFree = false });
-                db.Seats.Add(new Seat { Number = 7, SessionId = 8, Price = 100, IsFree = true });
-                db.SaveChanges();
-            }
         }
 
         public List<Seat> GetAll()

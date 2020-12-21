@@ -60,7 +60,22 @@ namespace back_end.Tests
             mockAppContext.Received().Seats.Find(id);
             mockAppContext.Received().SaveChanges();
             Assert.AreEqual(data.Number, 3);
-            Assert.AreEqual(data.IsFree, false);           
+            Assert.AreEqual(data.IsFree, false);
+            Assert.AreEqual(data.Price, 100);
+        }
+
+        [Test]
+        public void Update_Not_Calls_SaveChanges_On_Wrong_Id()
+        {
+            // Arrange
+            Int32 id = 10;
+
+            // Act
+            var data = seats.Update(id);
+
+            // Assert
+            mockAppContext.Received().Seats.Find(id);
+            mockAppContext.DidNotReceive().SaveChanges();
         }
 
         [Test]

@@ -57,6 +57,7 @@ namespace back_end.Tests
 
             // Assert
             Assert.AreEqual(data.SeatId, 1);
+            Assert.AreEqual(data.Id, 1);
         }
 
         [Test]
