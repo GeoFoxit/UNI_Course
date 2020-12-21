@@ -63,6 +63,10 @@ class Film extends Component {
                         >
                             {film.naming}
                         </Typography>
+                        <Typography>
+                            {film.genre}
+                        </Typography>
+                        <br />
                         <Rating size="small" name="read-only" value={film.rate} readOnly />
                     </CardContent>
                 </CardActionArea>
