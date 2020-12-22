@@ -15,7 +15,7 @@ namespace back_end.Controllers
         IService<Booking> service;
         public BookingsController(ApplicationContext context)
         {
-            service = new BookingsService(context);
+              service = new BookingsService(context);
         }
 
         //[HttpGet]

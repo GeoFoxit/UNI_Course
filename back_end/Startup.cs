@@ -26,12 +26,9 @@ namespace back_end
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-
         public void ConfigureServices(IServiceCollection services)
         {
             string con = "Host=localhost;Port=5432;Database=uni_project;Username=postgres;Password=12345;";
-            // устанавливаем контекст данных
             services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(con));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -40,26 +37,19 @@ namespace back_end
                         options.RequireHttpsMetadata = false;
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
-                            // укзывает, будет ли валидироваться издатель при валидации токена
+                            
                             ValidateIssuer = true,
-                            // строка, представляющая издателя
                             ValidIssuer = AuthOptions.ISSUER,
-
-                            // будет ли валидироваться потребитель токена
                             ValidateAudience = true,
-                            // установка потребителя токена
                             ValidAudience = AuthOptions.AUDIENCE,
-                            // будет ли валидироваться время существования
                             ValidateLifetime = true,
-
-                            // установка ключа безопасности
                             IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-                            // валидация ключа безопасности
+                            
                             ValidateIssuerSigningKey = true,
                         };
                     });
-
             services.AddControllers();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,10 +64,20 @@ namespace back_end
 
             app.UseRouting();
 
-            //app.useauthorization();
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // CORS
+            app.UseCors(builder =>
+            builder
+                //.WithOrigins("http://localhost:3000")
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                //.AllowCredentials()
+);
+
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

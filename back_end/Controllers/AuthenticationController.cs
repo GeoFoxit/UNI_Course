@@ -12,7 +12,7 @@ using back_end.Services;
 namespace back_end.Controllers
 {
     [ApiController]
-    [Route("auth")]
+    [Route("api/auth")]
     public class AuthenticationController : ControllerBase
     {
         IService<User> service;

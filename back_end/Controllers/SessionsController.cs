@@ -16,7 +16,7 @@ namespace back_end.Controllers
         IService<Session> service;
         public SessionsController(ApplicationContext context)
         {
-            service = new SessionsService(context);            
+            service = new SessionsService(context);
         }
 
         [Authorize]
