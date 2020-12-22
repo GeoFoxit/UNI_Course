@@ -217,7 +217,8 @@ class EditSessionsPage extends Component {
                                     }}
                                 >
                                     <ListItemText>
-                                        {session.dateTime + " --- " + this.state.films.find(x => x.id === session.filmId).naming}
+                                        {session.dateTime}
+                                        {/* {session.dateTime + " --- " + this.state.films.find(x => x.id === session.filmId).naming} */}
                                     </ListItemText>
                                     <div
                                         style={{
