@@ -218,7 +218,9 @@ class EditFilmsPage extends Component {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            padding: "1em"
+                            padding: "1em",
+                            position: "sticky",
+                            top: "7em"
                         }}
                     >
                         <TextField

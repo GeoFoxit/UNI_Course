@@ -57,7 +57,6 @@ class PlacesPage extends Component {
         this.props.history.goBack()
     }
 
-
     render() {
 
         const { classes } = this.props
@@ -75,8 +74,8 @@ class PlacesPage extends Component {
                 }}
             >
                 <h1>
-                    Вітаємо! Ви забронювали квиток з кодовим номером <b>{result.id}</b>!
-                    Ваше місце <b1>{result.seatId}</b1>
+                    Вітаємо! Ви забронювали квиток з кодовим номером <b>{result.id * 9129}</b>!
+                    Ваше місце <b1>{this.state.selected.number}</b1>
                 </h1>
                 <h4>
                     Щоб використати бронювання, покажіть кодовий номер при оплаті квитка в кінотеатрі.
