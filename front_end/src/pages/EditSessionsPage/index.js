@@ -9,30 +9,48 @@ import { NavLink } from 'react-router-dom';
 import Progress from '../../shared/Progress';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import { Rating } from '@material-ui/lab';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDateTimePicker
+} from '@material-ui/pickers';
 
 const styles = (theme) => ({})
-
-const genres = ['Драма', "Комедія", "Екшин", "Фентезі", "Триллер"]
 
 class EditSessionsPage extends Component {
 
     state = {
         isPending: true,
         films: [],
-        naming: "",
-        rate: 0,
-        genre: ""
+        sessions: [],
+        filmId: null,
+        dateTime: new Date("2021-01-01T00:00:00.000Z"),
     }
 
     componentDidMount = () => {
+        const token = localStorage.getItem('token')
+        const options = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
         API
             .get("/films")
             .then(data => {
                 this.setState({
                     films: data.data,
-                    isPending: false
                 })
+            })
+            .then(() => {
+                API
+                    .get("/sessions", options)
+                    .then(data => {
+                        this.setState({
+                            sessions: data.data,
+                            isPending: false
+                        })
+                    })
             })
             .catch(error => {
                 this.setState({
@@ -41,26 +59,29 @@ class EditSessionsPage extends Component {
             })
     }
 
-    addFilm = e => {
+    addSession = e => {
         const token = localStorage.getItem('token')
         const options = {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }
-        const { naming, genre, rate } = this.state
-        const filmData = {
-            naming, genre, rate
+        const { filmId, dateTime } = this.state
+        const sessionData = {
+            filmId,
+            dateTime: new Date(dateTime)
         }
 
+        console.dir(sessionData)
+
         API
-            .post('/films', filmData, options)
+            .post('/sessions', sessionData, options)
             .then(resp => {
                 if (resp.status === 200) {
-                    const updateFilms = [...this.state.films]
-                    updateFilms.push(resp.data)
+                    const updatedSessions = [...this.state.sessions]
+                    updatedSessions.push(resp.data)
                     this.setState({
-                        films: updateFilms
+                        sessions: updatedSessions
                     })
                 }
             })
@@ -68,7 +89,7 @@ class EditSessionsPage extends Component {
 
     }
 
-    deleteFilm = e => {
+    deleteSession = e => {
         const token = localStorage.getItem('token')
         const options = {
             headers: {
@@ -77,24 +98,29 @@ class EditSessionsPage extends Component {
         }
 
         API
-            .delete('/films/' + e, options)
+            .delete('/sessions/' + e, options)
             .then(resp => {
                 if (resp.status === 200) {
 
-                    const { films } = this.state
-                    const element = films.find(x => x.id === e)
-                    const index = films.indexOf(element)
-                    const updatedFilms = [...films]
-                    updatedFilms.splice(index, 1)
+                    const { sessions } = this.state
+                    const element = sessions.find(x => x.id === e)
+                    const index = sessions.indexOf(element)
+                    const updatedSessions = [...sessions]
+                    updatedSessions.splice(index, 1)
 
                     this.setState({
-                        films: updatedFilms
+                        sessions: updatedSessions
                     })
                 }
             })
             .catch(err => console.log(err))
     }
 
+    handleChangeDate = (e, value) => {
+        this.setState({
+            dateTime: value
+        })
+    }
 
     render() {
 
@@ -171,15 +197,27 @@ class EditSessionsPage extends Component {
                             minWidth: "45%"
                         }}
                     >
+                        {this.state.sessions.length === 0 ? (
+                            <Typography
+                                variant="h6"
+                                style={{
+                                    margin: "1em 1em 0em",
+                                }}
+                            >
+                                Немає сеансів
+                            </Typography>
+                        ) : null}
+
                         <List>
-                            {this.state.films.map((film, i) => (
+                            {this.state.sessions.map((session, i) => (
                                 <ListItem
+                                    key={i}
                                     style={{
                                         background: (i % 2 === 0 ? "white" : "#f8f8f8")
                                     }}
                                 >
                                     <ListItemText>
-                                        {film.naming}
+                                        {session.dateTime}
                                     </ListItemText>
                                     <div
                                         style={{
@@ -188,7 +226,7 @@ class EditSessionsPage extends Component {
                                     ></div>
                                     <ListItemSecondaryAction>
                                         <IconButton
-                                            onClick={() => this.deleteFilm(film.id)}
+                                            onClick={() => this.deleteSession(session.id)}
                                             color="secondary"
                                             size="large"
                                             edge="end"
@@ -211,54 +249,46 @@ class EditSessionsPage extends Component {
                         }}
                     >
                         <TextField
-                            fullWidth
-                            margin="dense"
-                            id="film_naming"
-                            value={this.state.naming}
-                            onChange={e => {
-                                this.setState({
-                                    naming: e.target.value
-                                })
-                            }}
-                            label="Назва фільму"
-                            variant="outlined"
-                        />
-                        <TextField
                             select
                             fullWidth
                             margin="dense"
-                            label="Жанр"
-                            value={this.state.genre}
+                            label="Назва фільму"
+                            value={this.state.filmId}
                             onChange={e => {
                                 this.setState({
-                                    genre: e.target.value
+                                    filmId: e.target.value
                                 })
                             }}
                             variant="outlined"
                         >
-                            {genres.map(option => (
-                                <MenuItem key={option} value={option}>
-                                    {option}
+                            {this.state.films.map(option => (
+                                <MenuItem key={option.id} value={option.id}>
+                                    {option.naming}
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <Rating
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDateTimePicker
+                                variant="inline"
+                                fullWidth
+                                ampm={false}
+                                margin="normal"
+                                label="Дата та час"
+                                onError={console.log}
+                                disablePast
+                                value={this.state.dateTime}
+                                onChange={this.handleChangeDate}
+                                format="yyyy/MM/dd HH:mm"
+                            />
+                        </MuiPickersUtilsProvider>
+                        <Button
                             style={{
                                 margin: "1em 0"
                             }}
-                            name="film_rate"
-                            value={this.state.rate}
-                            onChange={(event, newValue) => {
-                                this.setState({
-                                    rate: newValue
-                                })
-                            }}
-                        />
-                        <Button
                             fullWidth
                             variant="outlined"
                             color="primary"
-                            onClick={this.addFilm}
+                            onClick={this.addSession}
                         >
                             Додати
                         </Button>
