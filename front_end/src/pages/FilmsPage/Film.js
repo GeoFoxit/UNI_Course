@@ -26,13 +26,13 @@ class Film extends Component {
             <Card
                 style={{
                     height: "18em",
-                    width: "31.4%",
+                    width: this.props.width ? this.props.width : "31.4%",
                     margin: "0.5em",
                     minWidth: "200px"
                 }}
             >
                 <CardActionArea
-                    onClick={this.handleClick}
+                    onClick={this.props.disabled ? null : this.handleClick}
                     style={{
                         display: "flex",
                         flexDirection: "column",
