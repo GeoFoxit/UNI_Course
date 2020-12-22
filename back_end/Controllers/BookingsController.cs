@@ -1,4 +1,5 @@
 ﻿using back_end.models;
+using back_end.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,14 @@ namespace back_end.Controllers
     [Route("api/[controller]")]
     public class BookingsController : ControllerBase
     {
-        ApplicationContext db;
+        IService<Booking> service;
         public BookingsController(ApplicationContext context)
         {
-            db = context;
-            //if (!db.Bookings.Any())
-            //{
-            //    db.Bookings.Add(new Booking { SeatId = 1 });
-            //    db.SaveChanges();
-            //}
+              service = new BookingsService(context);
         }
 
         //[HttpGet]
-        //public ActionResult<IEnumerable<Booking>> Get()
+        //public ActionResult<List<Booking>> Get()
         //{
         //    return db.Bookings.ToList();
         //}

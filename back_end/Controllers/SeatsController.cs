@@ -1,4 +1,5 @@
 ﻿using back_end.models;
+using back_end.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,21 +12,16 @@ namespace back_end.Controllers
     [Route("api/[controller]")]
     public class SeatsController : ControllerBase
     {
-        ApplicationContext db;
+        IService<Seat> service;
+        IService<Booking> bookingService;
         public SeatsController(ApplicationContext context)
         {
-            db = context;
-            //if (!db.Seats.Any())
-            //{
-            //    db.Seats.Add(new Seat { Number = 5, SessionId = 7, Price = 100, IsFree = true });
-            //    db.Seats.Add(new Seat { Number = 6, SessionId = 8, Price = 100, IsFree = false });
-            //    db.Seats.Add(new Seat { Number = 6, SessionId = 8, Price = 100, IsFree = true });
-            //    db.SaveChanges();
-            //}
+            service = new SeatsService(context);
+            bookingService = new BookingsService(context);
         }
 
         //[HttpGet]
-        //public ActionResult<IEnumerable<Seat>> Get()
+        //public ActionResult<List<Seat>> Get()
         //{
         //    return db.Seats.ToList();
         //}
@@ -40,9 +36,9 @@ namespace back_end.Controllers
         //}
 
         [HttpGet("bysession/{sessionId}")]
-        public ActionResult<IEnumerable<Seat>> GetBySessionId(Int32 sessionId)
+        public ActionResult<List<Seat>> GetBySessionId(Int32 sessionId)
         {
-            return db.Seats.ToList().FindAll(x => x.SessionId == sessionId);
+            return new ActionResult<List<Seat>>(service.GetListById(sessionId));
         }
 
         //[HttpPost]
@@ -68,19 +64,15 @@ namespace back_end.Controllers
         [HttpPut("{id}")]
         public ActionResult<Seat> Book(Int32 id)
         {
-            Seat seat = db.Seats.Find(id);
+            Seat seat = service.Update(id);
             if (seat == null)
                 return NotFound();
 
-            seat.IsFree = false;
-            db.SaveChanges();
-
             Booking booking = new Booking { SeatId = seat.Id };
-            db.Bookings.Add(booking);
-            db.SaveChanges();
+            bookingService.Add(booking);
 
-            Booking book = db.Bookings.FirstOrDefault(x => x.SeatId == seat.Id);
-            return new ObjectResult(book);
+            Booking savedBooking = bookingService.GetById(seat.Id);
+            return new ObjectResult(savedBooking);
         }
     }
 }

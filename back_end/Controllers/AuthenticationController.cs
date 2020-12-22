@@ -7,8 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
-
-
+using back_end.Services;
 
 namespace back_end.Controllers
 {
@@ -16,19 +15,14 @@ namespace back_end.Controllers
     [Route("api/auth")]
     public class AuthenticationController : ControllerBase
     {
-        ApplicationContext db;
+        IService<User> service;
         public AuthenticationController(ApplicationContext context)
         {
-            db = context;
-            if (!db.Users.Any())
-            {
-                db.Users.Add(new User { Login = "adminn", Password = "password" });
-                db.SaveChanges();
-            }
+            service = new AuthenticationService(context);
         }
 
         //[HttpGet]
-        //public ActionResult<IEnumerable<User>> Get()
+        //public ActionResult<List<User>> Get()
         //{
         //    return db.Users.ToList();
         //}
@@ -93,7 +87,7 @@ namespace back_end.Controllers
 
         private ClaimsIdentity GetIdentity(string username, string password)
         {
-            User user = db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
+            User user = service.GetUser(username, password);
             if (user != null)
             {
                 var claims = new List<Claim>
@@ -105,7 +99,7 @@ namespace back_end.Controllers
                 return claimsIdentity;
             }
 
-            // если пользователя не найдено
+            // if no user found
             return null;
         }
     }

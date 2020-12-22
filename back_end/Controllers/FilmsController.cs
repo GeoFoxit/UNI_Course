@@ -1,4 +1,5 @@
 ﻿using back_end.models;
+using back_end.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,33 +14,22 @@ namespace back_end.Controllers
     [Route("api/[controller]")]
     public class FilmsController : ControllerBase
     {
-        ApplicationContext db;
+        IService<Film> service;
         public FilmsController(ApplicationContext context)
         {
-            db = context;
-            if (!db.Films.Any())
-            {
-                db.Films.Add(new Film { Naming= "The Dark Knight", Genre= "Триллер", Rate=5 });
-                db.Films.Add(new Film { Naming= "The Godfather", Genre= "Драма", Rate=4 });
-                db.Films.Add(new Film { Naming= "The Shawshank Redemption", Genre= "Драма", Rate=4 });
-                db.Films.Add(new Film { Naming= "Star Wars", Genre= "Фентезі", Rate=1 });
-                db.Films.Add(new Film { Naming= "Sonic", Genre= "Фентезі", Rate=2 });
-                db.Films.Add(new Film { Naming= "Holiday", Genre= "Екшин", Rate=3 });
-                db.Films.Add(new Film { Naming= "Joe", Genre= "Комедія", Rate=5 });
-                db.SaveChanges();
-            }
+            service = new FilmsService(context);
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Film>> Get()
+        public ActionResult<List<Film>> Get()
         {
-            return db.Films.ToList();
+            return new ActionResult<List<Film>>(service.GetAll());
         }
 
         [HttpGet("{id}")]
         public ActionResult<Film> GetById(Int32 id)
         {
-            Film film = db.Films.FirstOrDefault(x => x.Id == id);
+            Film film = service.GetById(id);
             if (film == null)
                 return NotFound();
             return new ObjectResult(film);
@@ -49,21 +39,16 @@ namespace back_end.Controllers
         [HttpPost]
         public ActionResult<Film> AddFilm(Film film)
         {
-            db.Films.Add(film);
-            db.SaveChanges();
-            return new ObjectResult(film);
+            return new ObjectResult(service.Add(film));
         }
 
         [Authorize]
         [HttpDelete("{id}")]
         public ActionResult<Film> DeleteFilm(Int32 id)
         {
-            Film film = db.Films.Find(id);
+            Film film = service.Delete(id);
             if (film == null)
                 return NotFound();
-
-            db.Films.Remove(film);
-            db.SaveChanges();
             return new ObjectResult(film);
         }
     }
