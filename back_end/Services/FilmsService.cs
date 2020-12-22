@@ -12,6 +12,13 @@ namespace back_end.Services
         public FilmsService(IApplicationContext context)
         {
             this.db = context;
+            if (!db.Films.Any())
+            {
+                db.Films.Add(new Film { Naming = "Star Wars", Genre = "Action", Rate = 4 });
+                db.Films.Add(new Film { Naming = "Star Wars 2", Genre = "Action", Rate = 5 });
+                db.Films.Add(new Film { Naming = "Star Wars 4", Genre = "Action", Rate = 2 });
+                db.SaveChanges();
+            }
         }
         public List<Film> GetAll()
         {

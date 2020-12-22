@@ -12,6 +12,11 @@ namespace back_end.Services
         public SessionsService(IApplicationContext context)
         {
             this.db = context;
+            if (!db.Sessions.Any())
+            {
+                db.Sessions.Add(new Session { FilmId = 1, DateTime = DateTime.Now });
+                db.SaveChanges();
+            }
         }
         public List<Session> GetAll()
         {

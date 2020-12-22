@@ -12,6 +12,11 @@ namespace back_end.Services
         public BookingsService(IApplicationContext context)
         {
             this.db = context;
+            if (!db.Bookings.Any())
+            {
+                db.Bookings.Add(new Booking { SeatId = 1 });
+                db.SaveChanges();
+            }
         }
 
         public Booking Add(Booking booking)
