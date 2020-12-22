@@ -42,7 +42,7 @@ class Films extends Component {
                 style={{
                     display: 'flex',
                     flexWrap: "wrap",
-                    margin: "0.5em auto",
+                    margin: "1.5em auto",
                     padding: "0 0.5em",
                     maxWidth: "800px",
                     justifyContent: "center"
