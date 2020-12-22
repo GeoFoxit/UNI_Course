@@ -171,9 +171,20 @@ class EditFilmsPage extends Component {
                             minWidth: "45%"
                         }}
                     >
+                        {this.state.films.length === 0 ? (
+                            <Typography
+                                variant="h6"
+                                style={{
+                                    margin: "1em 1em 0em",
+                                }}
+                            >
+                                Немає фільмів
+                            </Typography>
+                        ) : null}
                         <List>
                             {this.state.films.map((film, i) => (
                                 <ListItem
+                                    key={i}
                                     style={{
                                         background: (i % 2 === 0 ? "white" : "#f8f8f8")
                                     }}
@@ -237,7 +248,7 @@ class EditFilmsPage extends Component {
                             variant="outlined"
                         >
                             {genres.map(option => (
-                                <MenuItem key={option} value={option}>
+                                <MenuItem key={option.id} value={option}>
                                     {option}
                                 </MenuItem>
                             ))}
