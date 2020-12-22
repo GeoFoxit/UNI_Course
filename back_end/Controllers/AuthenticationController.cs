@@ -7,8 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
-
-
+using back_end.Services;
 
 namespace back_end.Controllers
 {
@@ -16,51 +15,46 @@ namespace back_end.Controllers
     [Route("auth")]
     public class AuthenticationController : ControllerBase
     {
-        ApplicationContext db;
+        IService<User> service;
         public AuthenticationController(ApplicationContext context)
         {
-            db = context;
-            if (!db.Users.Any())
-            {
-                db.Users.Add(new User { Login = "adminn", Password = "password" });
-                db.SaveChanges();
-            }
+            service = new AuthenticationService(context);
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<User>> Get()
-        {
-            return db.Users.ToList();
-        }
+        //[HttpGet]
+        //public ActionResult<List<User>> Get()
+        //{
+        //    return db.Users.ToList();
+        //}
 
-        [HttpGet("{id}")]
-        public ActionResult<User> GetById(Int32 id)
-        {
-            User user = db.Users.FirstOrDefault(x => x.Id == id);
-            if (user == null)
-                return NotFound();
-            return new ObjectResult(user);
-        }
+        //[HttpGet("{id}")]
+        //public ActionResult<User> GetById(Int32 id)
+        //{
+        //    User user = db.Users.FirstOrDefault(x => x.Id == id);
+        //    if (user == null)
+        //        return NotFound();
+        //    return new ObjectResult(user);
+        //}
 
-        [HttpPost]
-        public ActionResult<User> AddUser(User user)
-        {
-            db.Users.Add(user);
-            db.SaveChanges();
-            return new ObjectResult(user);
-        }
+        //[HttpPost]
+        //public ActionResult<User> AddUser(User user)
+        //{
+        //    db.Users.Add(user);
+        //    db.SaveChanges();
+        //    return new ObjectResult(user);
+        //}
 
-        [HttpDelete("{id}")]
-        public ActionResult<User> DeleteUser(Int32 id)
-        {
-            User user = db.Users.Find(id);
-            if (user == null)
-                return NotFound();
+        //[HttpDelete("{id}")]
+        //public ActionResult<User> DeleteUser(Int32 id)
+        //{
+        //    User user = db.Users.Find(id);
+        //    if (user == null)
+        //        return NotFound();
 
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return new ObjectResult(user);
-        }
+        //    db.Users.Remove(user);
+        //    db.SaveChanges();
+        //    return new ObjectResult(user);
+        //}
 
         [HttpPost("token")]
         public IActionResult Token(User user)
@@ -93,7 +87,7 @@ namespace back_end.Controllers
 
         private ClaimsIdentity GetIdentity(string username, string password)
         {
-            User user = db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
+            User user = service.GetUser(username, password);
             if (user != null)
             {
                 var claims = new List<Claim>
@@ -105,7 +99,7 @@ namespace back_end.Controllers
                 return claimsIdentity;
             }
 
-            // если пользователя не найдено
+            // if no user found
             return null;
         }
     }

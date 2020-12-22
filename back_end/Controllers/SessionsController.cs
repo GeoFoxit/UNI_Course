@@ -1,4 +1,5 @@
 ﻿using back_end.models;
+using back_end.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,23 +13,17 @@ namespace back_end.Controllers
     [Route("api/[controller]")]
     public class SessionsController : ControllerBase
     {
-        ApplicationContext db;
+        IService<Session> service;
         public SessionsController(ApplicationContext context)
         {
-            db = context;
-            if (!db.Sessions.Any())
-            {
-                //db.Sessions.Add(new Session { DateTime = new DateTime(2020, 12, 12, 20, 0, 0), FilmId = 2});
-                //db.Sessions.Add(new Session { DateTime = new DateTime(2020, 10, 10, 18, 0, 0), FilmId = 2 });
-                db.SaveChanges();
-            }
+            service = new SessionsService(context);            
         }
 
         [Authorize]
         [HttpGet]
-        public ActionResult<IEnumerable<Session>> Get()
+        public ActionResult<List<Session>> Get()
         {
-            return db.Sessions.ToList();
+            return new ActionResult<List<Session>>(service.GetAll());
         }
 
         //[HttpGet("{id}")]
@@ -41,38 +36,25 @@ namespace back_end.Controllers
         //}
 
         [HttpGet("byfilm/{filmId}")]
-        public ActionResult<IEnumerable<Session>> GetByFilmId(Int32 filmId)
+        public ActionResult<List<Session>> GetByFilmId(Int32 filmId)
         {
-            return db.Sessions.ToList().FindAll(x => x.FilmId == filmId);
+            return new ActionResult<List<Session>>(service.GetListById(filmId));
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult<Session> AddSession(Session session)
         {
-            db.Sessions.Add(session);
-            db.SaveChanges();
-
-            for (Int16 c = 1; c < 37; c++)
-            {
-                Seat seat = new Seat { IsFree = true, Number = c, Price = 120, SessionId = session.Id };
-                db.Seats.Add(seat);
-            }
-            
-            db.SaveChanges();
-            return new ObjectResult(session);
+            return new ObjectResult(service.Add(session));
         }
 
         [Authorize]
         [HttpDelete("{id}")]
         public ActionResult<Session> DeleteSession(Int32 id)
         {
-            Session session = db.Sessions.Find(id);
+            Session session = service.Delete(id);
             if (session == null)
                 return NotFound();
-
-            db.Sessions.Remove(session);
-            db.SaveChanges();
             return new ObjectResult(session);
         }
     }
